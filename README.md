@@ -65,10 +65,10 @@ spring:
     password: ${MAIL_PASSWORD}
     properties:
       mail:
-      smpt:
-      auth: true
-      starttls:
-      enable: true
+        smpt:
+          auth: true
+          starttls:
+            enable: true
 
 server: 
   error:
