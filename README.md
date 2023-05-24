@@ -39,31 +39,56 @@
 - # Rodar utilizando o código fonte
 ### Se tratando de um projeto Spring Boot, você pode baixar o projeto, baixar as dependências usando o ***Maven*** e rodar o arquivo ***VallyToolApplication.java*** como um arquivo java normal.
 
-### Crie o arquivo application.properties em src/main/resources e insira mudando as suas informações.
+### Crie o arquivo application.yml em src/main/resources e insira mudando as suas informações.
+
+```yml
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa: 
+    hibernate:
+      ddl-auto: update
+    properties: 
+      hibernate:
+        show_sql: true
+        format_sql:  true
+        dialect: org.hibernate.dialect.MySQL8Dialect	
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+      smpt:
+      auth: true
+      starttls:
+      enable: true
+
+server: 
+  error:
+    whitelabel: 
+      enabled: false
+    path: /error
 ```
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.username=seuusuariomysql      
-spring.datasource.password=suasenhamysql
-spring.datasource.url=jdbc:mysql://localhost:3306/vallytooldb?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC
-
-# jpa properties
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.show_sql=false
-spring.jpa.properties.hibernate.format_sql=true
-server.error.whitelabel.enabled=false
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
-server.error.path=/error
-
-spring.mail.host=smtp.gmail.com
-spring.mail.port=587
-spring.mail.username=seuemail
-spring.mail.password=suasenha (Senha de APP)
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties..mail.smtp.starttls.enable=true
+### Adicione essas variáveis no environment colocando as suas informações
+```
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=vallytooldb
+DB_USERNAME=
+DB_PASSWORD=
+MAIL_USERNAME=
+MAIL_PASSWORD=
 ```
 
-### OBS: Coloque a sua senha e usuario do MySQL no arquivo application.properties.
+## OBS: A senha do email é senha de app, deve ser gerada.
+
 
 # Para rodar usando a build pronta siga estes passos:
 
